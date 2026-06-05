@@ -10,7 +10,7 @@ ramaop send-emits>(*agent-name,
                    *rstats,
                    *fork-context)
 {
-  anchor>(<root>); // maybe a special operator for anchor/hook. \<root>
+  anchor <root>; // maybe a special operator for anchor/hook. \<root>
   ops/explode(*emits) > {*invoke-id, *fork-invoke-id, *target-task-id, *node-name, *args} as *emit;
   hook:emit>(*emit)
   apart/|aor([*agent-name, *agent-task-id, *agent-id, *retry-num], |direct, *target-task-id)
@@ -20,9 +20,10 @@ ramaop send-emits>(*agent-name,
                            *node-name, 
                            *args, 
                            *agg-invoke-id) > *op;
-  anchor>(<regular-emit>)
+  anchor <regular-emit>;
   
-  hook>(<root>)
+  hook <root>;
+
   mapv(comp(h/half-uuid, :inoke-id), *emits)               > *next-ack-vals;
   reduce(bit-xor, h/half-uuid(*invoke-id), *next-ack-vals) > *ack-val;
   apart/|aor(*agent-name, 
@@ -48,7 +49,7 @@ ramaop send-emits>(*agent-name,
     ramafn %update-ack-val(*v){ > bit-xor(*v, *ack-val) };
     $$root !<-- keypath(*agent-id), :ack-val, term(%update-ack-val);
                                         // notice no space, for binding to different name than key
-    $$root -->  kepyath(*agent-id) > {*root-ack-val :ack-val, *result}
+    $$root -->  kepyath(*agent-id) > {*root-ack-val :ack-val, *result};
     
    if(=(0, *root-ack-val)) {
      if(nil?(*result)) {
@@ -64,9 +65,9 @@ ramaop send-emits>(*agent-name,
                    :all,
                    AFTER-ELEM,
                    termval(*finished-streaming-chunk);
-     }
-   }
-  }
+     };
+   };
+  };
   unify>(<regular-emit>, <agg-ack-emit>);
   > *op;
 }
