@@ -25,7 +25,7 @@ class RamaParserTest {
       var root = tree.getRootNode();
       assertEquals("source_file", root.getType());
       assertTrue(root.toSexp().contains("ramaop_definition"));
-      assertTrue(root.hasError()); // grammar still has minor error nodes in this example
+      assertFalse(root.hasError());
     }
   }
 }

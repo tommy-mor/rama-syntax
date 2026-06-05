@@ -219,13 +219,8 @@ module.exports = grammar({
     _callable: $ =>
       choice($.operator_name, $.qualified_name, $.simple_identifier, $.keyword),
 
-    operator_name: $ =>
-      token(
-        prec(
-          1,
-          /(?:[a-z][\w%|*.:/-]*[\/:][\w%|*.:/-]*|[a-z]+-[\w]+)>/,
-        ),
-      ),
+    // Trailing `>` for Rama operators (send-emits>, hook:emit>), not `->` or binding ` > `.
+    operator_name: $ => token(prec(1, /[a-z][\w%|*.:/-]*(?:[\/:]|[\w])>/)),
 
     argument_list: $ => seq($.argument, repeat(seq(optional(','), $.argument))),
 
