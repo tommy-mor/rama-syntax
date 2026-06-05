@@ -3,3 +3,5 @@ tree-sitter-rama/node_modules/
 tree-sitter-rama/tree-sitter-rama.dylib
 tree-sitter-rama/src/parser.c
 rama-jtreesitter/target/
+rama-lsp/target/
+vscode-rama/node_modules/

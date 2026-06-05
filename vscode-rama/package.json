@@ -1,0 +1,87 @@
+{
+  "name": "vscode-rama",
+  "displayName": "Rama",
+  "description": "Rama surface syntax — semantic highlighting via rama-lsp (tree-sitter)",
+  "version": "0.1.0",
+  "publisher": "syntax",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": ["Programming Languages"],
+  "activationEvents": ["onLanguage:rama"],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "rama",
+        "aliases": ["Rama", "rama"],
+        "extensions": [".rama"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "semanticTokenTypes": [
+      {
+        "id": "label",
+        "description": "Anchor / hook labels",
+        "superType": "enumMember"
+      },
+      {
+        "id": "starVar",
+        "description": "*-prefixed bindings",
+        "superType": "parameter"
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "rama",
+        "scopes": {
+          "function": ["entity.name.function"],
+          "variable": ["variable.other"],
+          "starVar": ["variable.parameter"],
+          "label": ["entity.name.tag"],
+          "property": ["variable.other.constant"],
+          "string": ["string.quoted"],
+          "comment": ["comment.line"],
+          "type": ["entity.name.type"]
+        }
+      }
+    ],
+    "configuration": {
+      "title": "Rama",
+      "properties": {
+        "rama.languageServer.jar": {
+          "type": "string",
+          "default": "",
+          "description": "Path to rama-lsp fat JAR. Empty uses ../rama-lsp/target/rama-lsp-0.1.0-SNAPSHOT.jar relative to this extension."
+        },
+        "rama.languageServer.javaPath": {
+          "type": "string",
+          "default": "java",
+          "description": "Java executable used to start the LSP server."
+        },
+        "rama.languageServer.highlightsScm": {
+          "type": "string",
+          "default": "",
+          "description": "Path to highlights.scm. Empty uses ../tree-sitter-rama/queries/highlights.scm relative to this extension."
+        },
+        "rama.languageServer.grammarDylib": {
+          "type": "string",
+          "default": "",
+          "description": "Path to tree-sitter-rama.dylib. Empty uses ../tree-sitter-rama/tree-sitter-rama.dylib relative to this extension."
+        },
+        "rama.trace.server": {
+          "type": "string",
+          "enum": ["off", "messages", "verbose"],
+          "default": "verbose",
+          "description": "Log LSP traffic to the Output panel channel “Rama Language Server”."
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.84.0"
+  }
+}
