@@ -1,0 +1,14 @@
+{
+  "name": "tree-sitter-rama",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rama-like surface syntax grammar for tree-sitter",
+  "license": "MIT",
+  "devDependencies": {
+    "tree-sitter-cli": "^0.24.7"
+  },
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
+  }
+}

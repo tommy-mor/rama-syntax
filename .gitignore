@@ -1,1 +1,5 @@
 repomix-output.xml
+tree-sitter-rama/node_modules/
+tree-sitter-rama/tree-sitter-rama.dylib
+tree-sitter-rama/src/parser.c
+rama-jtreesitter/target/

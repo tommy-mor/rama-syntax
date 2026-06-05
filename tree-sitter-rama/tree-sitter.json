@@ -1,0 +1,23 @@
+{
+  "grammars": [
+    {
+      "name": "rama",
+      "camelcase": "Rama",
+      "scope": "source.rama",
+      "path": ".",
+      "file-types": ["rama"],
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Rama-like surface syntax grammar for tree-sitter",
+    "authors": [{ "name": "syntax" }]
+  },
+  "bindings": {
+    "c": true,
+    "node": false,
+    "rust": false
+  }
+}
