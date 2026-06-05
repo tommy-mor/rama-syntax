@@ -24,12 +24,12 @@ ramaop send-emits>(*agent-name,
   
   hook <root>;
 
-  mapv(comp(h/half-uuid, :inoke-id), *emits)               > *next-ack-vals;
+  mapv(comp(h/half-uuid, :invoke-id), *emits)               > *next-ack-vals;
   reduce(bit-xor, h/half-uuid(*invoke-id), *next-ack-vals) > *ack-val;
-  apart/|aor(*agent-name, 
-             *agent-task-id,
-             *agent-id,
-             *retry-num), |direct, *agent-task-id);
+  apart/|aor([*agent-name, 
+              *agent-task-id,
+              *agent-id,
+              *retry-num], |direct, *agent-task-id);
 
   // atomic here only because tests override the hook to elide this
   atomic {
@@ -44,12 +44,12 @@ ramaop send-emits>(*agent-name,
                          selected(:result, nil?),
                          multi-path([:result, termval(*result)]
                                     [:finish-time-millis termval(*finish-time-millis)]);
-    $$stream-shared !<-- :active-invokes, set-elem(*agent-id) NONE>;
+    $$stream-shared !<-- :active-invokes, set-elem(*agent-id), NONE>;
   } else {
     ramafn %update-ack-val(*v){ > bit-xor(*v, *ack-val) };
     $$root !<-- keypath(*agent-id), :ack-val, term(%update-ack-val);
                                         // notice no space, for binding to different name than key
-    $$root -->  kepyath(*agent-id) > {*root-ack-val :ack-val, *result};
+    $$root -->  keypath(*agent-id) > {*root-ack-val :ack-val, *result};
     
    if(=(0, *root-ack-val)) {
      if(nil?(*result)) {
