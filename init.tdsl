@@ -1,0 +1,30 @@
+what about coffeescript/moonscript syntax...
+
+-->! $$root, :streaming, MAP-VALS, :all, AFTER-ELEM, termval *finished;
+
+Where apply is space, comma is sibling.hmm but that doesn't work well for nested subexpressions. How does moonscript handle that... 
+
+-->! $root, keypath *agent-id, multi-path [:result, termval aor-types/->AgentResult "agent completed", true], [:finished-time-millis, termval *millis]
+
+Or Haskell/ml style? Significant whitespace? Use $ operator? No. 
+
+-->! $root keypath *agent-id, multi-path [:result, termval clojure(aor-types/->AgentResult "agent completed" true)], [:finished-time-millis, termval *millis]
+
+Hmm.
+
+
+I think just having a (clojure block, and just run the clojure reader on that string. Also, I want it to be c-style syntax. Heretical. But delicious. 
+
+local-select keypath(*agent-id) $$root > *result;
+
+Or maybe since select/transform are so common, 
+
+keypath(*agent-id) $$root --> *result;
+
+or 
+
+--> $$root  :streaming MAP-VALS :all AFTER-ELEM termval(*finished-streaming-chunk);
+
+Transform can be -->! 
+
+Also, having a path static typechecker on pstates would be amazing. Existing semantics are it usually returns nil or _maybe_ throws if you're lucky.
