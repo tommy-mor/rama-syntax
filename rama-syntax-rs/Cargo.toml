@@ -1,0 +1,17 @@
+[package]
+name = "rama_syntax"
+version = "0.1.0"
+edition = "2021"
+description = "Rust parser and type-checker stub for Rama surface syntax (.rama)"
+license = "MIT"
+readme = "README.md"
+
+[[bin]]
+name = "rama-check"
+path = "src/bin/rama-check.rs"
+
+[dependencies]
+chumsky = { version = "0.9", default-features = false, features = ["std"] }
+logos = "0.14"
+
+[dev-dependencies]
